@@ -19,4 +19,13 @@ export class ListTripsService {
     let url = 'http://localhost:3000/view';
     return this.http.get(url);
   }
+
+  deleteViaje(id: number) {
+    let url = 'http://localhost:3000/travels/';
+    let Url = url + id;
+    // console.log(Url);
+    return this.http.delete(Url).subscribe((data) => {
+      console.log(data);
+    });
+  }
 }

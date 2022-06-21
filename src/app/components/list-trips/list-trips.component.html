@@ -24,6 +24,14 @@
           mat-sort-header></span> </th>
         <td mat-cell *matCellDef="let viajes"> {{viajes.destino}} </td>
       </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef ></th>
+        <td mat-cell *matCellDef="let row; let i=index; let viajes"> <button mat-icon-button (click)="delete(viajes.id)"
+         >
+          <mat-icon title="Eliminar vehiculo"><i class="material-icons  edit">delete</i></mat-icon>
+        </button> </td>
+      </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

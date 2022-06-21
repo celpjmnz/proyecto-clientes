@@ -6,6 +6,7 @@ import { ListTripsService } from '../services/list-trips.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 import { LoginService } from '../services/login.service';
+import { DeleteTripComponent } from './delete-trip/delete-trip.component';
 
 @Component({
   selector: 'app-list-trips',
@@ -14,7 +15,13 @@ import { LoginService } from '../services/login.service';
 })
 export class ListTripsComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
-  displayedColumns = ['fecha', 'conductor', 'tipoVehiculo', 'destino'];
+  displayedColumns = [
+    'fecha',
+    'conductor',
+    'tipoVehiculo',
+    'destino',
+    'actions',
+  ];
   idUsuario: any;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -38,9 +45,6 @@ export class ListTripsComponent implements OnInit {
 
   ngOnInit() {
     this.service.getViajes().subscribe((data) => {
-      /*  if (!data) {
-        return 'Error en la llamada';
-      } */
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
@@ -91,5 +95,16 @@ export class ListTripsComponent implements OnInit {
       );
     };
     return filterFunction;
+  }
+  delete(id: number): void {
+    const dialogRef = this.dialog.open(DeleteTripComponent, {
+      data: { id },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        this.ngOnInit();
+      }
+    });
   }
 }

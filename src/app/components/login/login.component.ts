@@ -8,14 +8,24 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  nombreUsuarioCliente!: string;
+  password!: string;
+
   constructor(private router: Router, private service: LoginService) {}
 
   login() {
-    this.service.login().subscribe((resp) => {
-      console.log(resp.idUsuarioCliente);
-      if (resp.idUsuarioCliente) {
+    /* this.service.login().subscribe((resp) => {
+      console.log(typeof resp?.idUsuarioCliente);
+      if (resp) {
         this.router.navigate(['./listTrips']);
       }
+    }); */
+    const user = {
+      nombreUsuarioCliente: this.nombreUsuarioCliente,
+      password: this.password,
+    };
+    this.service.login(user).subscribe((data) => {
+      console.log(data);
     });
   }
 

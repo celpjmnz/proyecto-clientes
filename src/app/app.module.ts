@@ -25,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { DeleteTripComponent } from './components/list-trips/delete-trip/delete-trip.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     ListTripsComponent,
     LoginComponent,
     RegisterComponent,
+    DeleteTripComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,12 +9,11 @@ import { users } from './components/shared/models/users';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  get user() {
-    //  console.log(this.service.clientes);
-    return this.service.clientes;
-  }
+  /*  get user() {
+    return this.Loginservice.clientes;
+  } */
 
-  constructor(private service: LoginService, private router: Router) {}
+  constructor(private Loginservice: LoginService, private router: Router) {}
 
   ngOnInit(): void {}
 

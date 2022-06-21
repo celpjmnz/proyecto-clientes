@@ -20,10 +20,11 @@
       </button>
       <span>Travelling</span>
       <span class="example-spacer"></span>
-      <span>{{user.idUsuarioCliente}}</span>
-      <button mat-icon-button class="example-icon">
+     <!--  <span>{{user.nombreUsuarioCliente}}</span> -->
+
+      <!-- <button mat-icon-button class="example-icon" disabled>
         <mat-icon>perm_identity</mat-icon>
-      </button>
+      </button> -->
       <button mat-icon-button class="example-icon" (click)="logout()">
         <mat-icon>power_settings_new</mat-icon>
       </button>
@@ -31,6 +32,7 @@
 
     <div class="container">
     <router-outlet></router-outlet>
+    
   </div>
   
 </mat-sidenav-container>

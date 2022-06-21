@@ -8,10 +8,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginGuard } from './components/login/login.guard';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
   { path: 'listTrips', component: ListTripsComponent, canLoad: [LoginGuard] },
-  { path: 'addTrip', component: AddTripComponent },
+  { path: 'addTrip', component: AddTripComponent, canLoad: [LoginGuard] },
   { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: LoginComponent },
 ];
