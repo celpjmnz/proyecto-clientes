@@ -18,6 +18,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AddTripService } from '../services/add-trip.service';
+import { AuthenticationTokenService } from '../services/check-token.service';
 import { UsersService } from '../services/users.service';
 import { trips } from '../shared/models/trips';
 
@@ -50,7 +51,8 @@ export class AddTripComponent implements OnInit {
     private serviceConductores: UsersService,
     private service: AddTripService,
     private _formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private AuthService: AuthenticationTokenService
   ) {
     // this.viajes = new trips();
     this.getConductores();
@@ -59,6 +61,7 @@ export class AddTripComponent implements OnInit {
 
   ngOnInit() {
     this.setForm();
+    this.AuthService.getAuth();
   }
 
   setForm() {

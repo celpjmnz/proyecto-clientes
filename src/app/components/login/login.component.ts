@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 
@@ -10,28 +11,39 @@ import { LoginService } from '../services/login.service';
 export class LoginComponent implements OnInit {
   nombreUsuarioCliente!: string;
   password!: string;
+  UsuariosForm!: FormGroup;
 
   constructor(private router: Router, private service: LoginService) {}
 
+  setForm() {
+    this.UsuariosForm = new FormGroup({
+      nombreUsuarioCliente: new FormControl(this.nombreUsuarioCliente, [
+        Validators.required,
+      ]),
+      password: new FormControl(this.password, [Validators.required]),
+    });
+  }
+
   login() {
-    /* this.service.login().subscribe((resp) => {
-      console.log(typeof resp?.idUsuarioCliente);
-      if (resp) {
-        this.router.navigate(['./listTrips']);
-      }
-    }); */
-    const user = {
-      nombreUsuarioCliente: this.nombreUsuarioCliente,
-      password: this.password,
-    };
-    this.service.login(user).subscribe((data) => {
+    this.service.login(this.UsuariosForm.value).subscribe((data) => {
       console.log(data);
+      localStorage.setItem(
+        'loginToken',
+        JSON.stringify({
+          username: this.UsuariosForm.value.nombre,
+          time: new Date().toISOString(),
+        })
+      );
+      this.router.navigate(['./listTrips']);
     });
   }
 
   logout() {
+    localStorage.removeItem('loginToken');
     this.router.navigate(['./login']);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setForm();
+  }
 }

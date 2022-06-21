@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { DeleteTripComponent } from './delete-trip/delete-trip.component';
+import { AuthenticationTokenService } from '../services/check-token.service';
 
 @Component({
   selector: 'app-list-trips',
@@ -39,7 +40,11 @@ export class ListTripsComponent implements OnInit {
   };
   VehiculosList = [];
 
-  constructor(private service: ListTripsService, public dialog: MatDialog) {
+  constructor(
+    private service: ListTripsService,
+    public dialog: MatDialog,
+    private AuthService: AuthenticationTokenService
+  ) {
     //this.getVehiculos();
   }
 
@@ -51,6 +56,7 @@ export class ListTripsComponent implements OnInit {
       this.dataSource.filterPredicate = this.createFilter();
     });
     this.onChanges();
+    this.AuthService.getAuth();
   }
 
   /*  getVehiculos() {

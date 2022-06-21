@@ -8,11 +8,11 @@ import { retry, catchError, Observable, tap, map, of } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginService {
-  /* private _clients: clients | undefined;
+  private _clients: clients | undefined;
 
   get clientes(): clients {
     return { ...this._clients! };
-  } */
+  }
 
   constructor(public http: HttpClient) {}
 
@@ -29,14 +29,10 @@ export class LoginService {
     );
   } */
 
-  login(user: clients) {
-    let url = 'http://localhost:3000/clientusers/4';
-    /* return this.http.get<clients>(url).pipe(
-      tap((clientes) => (this._clients = clientes)),
-      tap((clientes) =>
-        localStorage.setItem('idUsuarioCliente', clientes.idUsuarioCliente)
-      )
-    ) */ return this.http.post<clients>(url, user);
+  login(user: any) {
+    let url = 'http://localhost:3000/loginclientusers';
+
+    return this.http.post(url, user);
   }
 
   register(data: clients): Observable<clients> {
